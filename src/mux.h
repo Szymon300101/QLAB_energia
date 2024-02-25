@@ -1,5 +1,5 @@
-#ifndef MUX_CPP
-#define MUX_CPP
+#ifndef MUX_H
+#define MUX_H
 
 #include <Arduino.h>
 #include <Wire.h>

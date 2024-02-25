@@ -1,10 +1,10 @@
-#ifndef TSL_CPP
-#define TSL_CPP
+#ifndef TSL_H
+#define TSL_H
 
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
-#include "mux.cpp"
+#include "mux.h"
 
 #define INTEGR_TIME TSL2561_INTEGRATIONTIME_101MS
 
