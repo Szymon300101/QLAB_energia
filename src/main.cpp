@@ -2,6 +2,7 @@
 #include <TM1637Display.h>
 #include "tsl.h"
 #include "vcSensor.h"
+#include "log.h"
 
 
 #define CLK 6
@@ -26,6 +27,7 @@ void setup(void)
 
   tsl_sensor.begin();
   vc_sensor.begin();
+  Log::begin();
 
   
   display.setBrightness(0x0f);
