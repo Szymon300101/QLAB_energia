@@ -4,6 +4,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
 #include <TM1637Display.h>
+#include "tsl.cpp"
 
 
 #define CLK 6
@@ -56,6 +57,9 @@ void setup(void)
 
   
   display.setBrightness(0x0f);
+
+
+  Tsl sensor = Tsl(1,0x39);
 }
 
 void loop(void) 
