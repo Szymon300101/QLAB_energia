@@ -11,7 +11,7 @@ namespace Log
 {
     RTC_DS1307 rtc;
 
-    bool tryReadTimeFromFile()
+    bool _tryReadTimeFromFile()
     {
         if(!SD.exists("time.txt"))
             return false;
@@ -50,6 +50,18 @@ namespace Log
         return true;
     }
 
+    void _filePrintDateTime(File logFile)
+    {
+        DateTime timeNow = rtc.now();
+
+        logFile.print(timeNow.year());      logFile.print("-");
+        logFile.print(timeNow.month());     logFile.print("-");
+        logFile.print(timeNow.day());       logFile.print(" ");
+        logFile.print(timeNow.hour());      logFile.print(":");
+        logFile.print(timeNow.minute());    logFile.print(":");
+        logFile.print(timeNow.second());
+    }
+
     bool begin()
     {
         if (!rtc.begin()) {
@@ -61,7 +73,7 @@ namespace Log
             return false;
         }
 
-        tryReadTimeFromFile();
+        _tryReadTimeFromFile();
 
         if(!rtc.isrunning()){
             Serial.println("ERROR: RTC not running.");
@@ -71,10 +83,9 @@ namespace Log
         return true;
     }
 
-
-    void save()
+    void saveAllData()
     {
-        File logFile = SD.open("Log.txt", FILE_WRITE);
+        File logFile = SD.open("Data.txt", FILE_WRITE);
         DateTime timeNow = rtc.now();
 
         if(!logFile)
@@ -84,14 +95,27 @@ namespace Log
         }
 
         //print dateTime
-        logFile.print(timeNow.year());      logFile.print("-");
-        logFile.print(timeNow.month());     logFile.print("-");
-        logFile.print(timeNow.day());       logFile.print(" ");
-        logFile.print(timeNow.hour());      logFile.print(":");
-        logFile.print(timeNow.minute());    logFile.print(":");
-        logFile.print(timeNow.second());    logFile.print("; ");
+        _filePrintDateTime(logFile);    logFile.print("; ");
 
 
+
+        logFile.close();
+    }
+
+    void saveErrorInfo(byte code, const char* msg)
+    {
+        File logFile = SD.open("ErrorLog.txt", FILE_WRITE);
+
+        if(!logFile)
+        {
+            //supress error
+            return;
+        }
+
+        //print dateTime
+        _filePrintDateTime(logFile);    logFile.print("; ");
+        logFile.print(code);            logFile.print("; ");
+        logFile.print(msg);            logFile.print("; ");
 
         logFile.close();
     }
