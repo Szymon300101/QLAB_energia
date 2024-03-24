@@ -8,7 +8,7 @@
 enum ErrorCode{
     generic         = 00,
     sensor_init     = 01,
-    file_operation  = 02,
+    sd_operation    = 02,
     
 };
 

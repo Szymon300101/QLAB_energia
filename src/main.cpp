@@ -1,18 +1,11 @@
 #include <Arduino.h>
-#include <TM1637Display.h>
 #include "tsl.h"
 #include "vcSensor.h"
 #include "log.h"
 #include "display.h"
 
-
-#define CLK 6
-#define DIO 7
-
-Tsl tsl_sensor = Tsl(1,0x39);
-VcSensor vc_sensor = VcSensor(0x70);
-
-TM1637Display display(CLK, DIO);
+// Tsl tsl_sensor = Tsl(1,0x39);
+// VcSensor vc_sensor = VcSensor(0x70);
 
 float led_pwm = 10;
 float led_p = 0.03;
@@ -21,18 +14,14 @@ float setpoint = 500;
 void setup(void) 
 {
   Serial.begin(115200);
-  pinMode(5, OUTPUT);
   delay(5000);
     
   // Serial.println("Hello!");
 
-  Display::begin();
-  tsl_sensor.begin();
-  vc_sensor.begin();
+  // Display::begin();
+  // tsl_sensor.begin();
+  // vc_sensor.begin();
   Log::begin();
-
-  
-  display.setBrightness(0x0f);
 
 
 }

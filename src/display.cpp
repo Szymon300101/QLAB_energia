@@ -2,8 +2,8 @@
 
 namespace Display
 {
-    TM1637Display display_A = TM1637Display(6, 7); // CLK_PIN, DIO_PIN //TODO
-    TM1637Display display_B = TM1637Display(8, 9); // CLK_PIN, DIO_PIN //TODO
+    TM1637Display display_A = TM1637Display(2, 4); // CLK_PIN, DIO_PIN //TODO
+    TM1637Display display_B = TM1637Display(0, 15); // CLK_PIN, DIO_PIN //TODO
 
     Blinker _error_blinker = Blinker(100, 2000);
 

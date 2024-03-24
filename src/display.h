@@ -7,10 +7,10 @@
 
 #define DISPLAY_BRIGHTNESS 0x0f
 
-#define STATUS_LED_PIN_A1 10
-#define STATUS_LED_PIN_A2 11
-#define STATUS_LED_PIN_B1 12
-#define STATUS_LED_PIN_B2 13
+#define STATUS_LED_PIN_A1 1
+#define STATUS_LED_PIN_A2 3
+#define STATUS_LED_PIN_B1 16
+#define STATUS_LED_PIN_B2 17
 
 namespace Display
 {

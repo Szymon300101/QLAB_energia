@@ -3,10 +3,11 @@
 
 #include "RTClib.h"
 #include <SPI.h>
-#include <SD.h>
+#include "SdFat.h"
 #include "state.h"
 
-#define SD_CS_PIN 4
+#define SD_CS_PIN 5
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(16))
 
 namespace Log
 {
@@ -14,7 +15,9 @@ namespace Log
 
     bool _tryReadTimeFromFile();
 
-    void _filePrintDateTime(File logFile);
+    void _filePrintDateTime(FsFile logFile);
+
+    void _serialPrintDateTime();
 
     bool begin();
 
