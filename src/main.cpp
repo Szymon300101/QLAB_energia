@@ -3,6 +3,7 @@
 #include "vcSensor.h"
 #include "log.h"
 #include "display.h"
+#include "sensors.h"
 
 // Tsl tsl_sensor = Tsl(1,0x39);
 // VcSensor vc_sensor = VcSensor(0x70);
@@ -22,12 +23,19 @@ void setup(void)
   // tsl_sensor.begin();
   // vc_sensor.begin();
   Log::begin();
+  Sensors::begin();
 
-
+  analogWrite(32, 200);
 }
 
 void loop(void) 
 {
+  Serial.print(Sensors::tslSensors[0][1].read_lux());
+  Serial.print("   ");
+
+  Sensors::vcSensors[0].read();
+  Serial.println(Sensors::vcSensors[0].current_mA);
+
 
   // tsl_sensor.read_lux();
   // /* Display the results (light is measured in lux) */
@@ -60,5 +68,5 @@ void loop(void)
 
   // display.showNumberDec(vc_sensor.current_mA);
 
-  delay(200);
+  delay(500);
 }
