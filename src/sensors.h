@@ -10,6 +10,15 @@
 
 namespace Sensors
 {
+    struct CombinedTslData
+    {
+        float avg_active_qls;
+        float avg_active_ref;
+        
+        float max_active_qls;
+        float max_active_ref;
+    };
+
     //ADDRESSING CONVENTION
     /*
         sensors IDs in room (looking from the top):
@@ -35,12 +44,16 @@ namespace Sensors
     */
 
     //addresses set up in 'sensors.cpp'
-    extern Tsl tslSensors[ROOM_NUM][TSL_NUM];
+    extern Tsl tsl_sensors[ROOM_NUM][TSL_NUM];
 
     //addresses set up in 'sensors.cpp'
-    extern VcSensor vcSensors[VC_NUM];
+    extern VcSensor vc_sensors[VC_NUM];
 
     void begin();
+
+    void readAll();
+
+    CombinedTslData getCombinedTslData();
 }
 
 

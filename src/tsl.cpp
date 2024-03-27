@@ -23,15 +23,10 @@ bool Tsl::begin()
 
 float Tsl::read_lux()
 {
-    sensors_event_t event;
-
     Mux::select(_mux_addr);
-    _sensor.getEvent(&event);
+    _sensor.getEvent(&_event);
 
-    if (event.light)
-        val_lux = event.light;
-    else
-        val_lux = -1;
+    val_lux = _event.light;
 
     return val_lux;
 }

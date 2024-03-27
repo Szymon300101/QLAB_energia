@@ -3,6 +3,20 @@
 
 namespace State
 {
+    bool qls_open = true;
+    bool ref_open = true;
+
+    
+    byte getQlsActiveRoom()
+    {
+        return qls_open ? 0 : 1;
+    }
+    
+    byte getRefActiveRoom()
+    {
+        return ref_open ? 2 : 3;
+    }
+
     void throwError(bool code, const char* msg)
     {
         //log error

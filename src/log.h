@@ -5,6 +5,8 @@
 #include <SPI.h>
 #include "SdFat.h"
 #include "state.h"
+#include "sensors.h"
+#include "lights.h"
 
 #define SD_CS_PIN 5
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(16))

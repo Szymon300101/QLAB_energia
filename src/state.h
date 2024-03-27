@@ -14,6 +14,12 @@ enum ErrorCode{
 
 namespace State
 {
+    extern bool qls_open;
+    extern bool ref_open;
+
+    byte getQlsActiveRoom();
+    byte getRefActiveRoom();
+
     void throwError(bool code, const char* msg);
 }
 

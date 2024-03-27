@@ -14,6 +14,8 @@ class Tsl
     byte _i2c_adrr;
     byte _mux_addr;
     Adafruit_TSL2561_Unified _sensor;
+    
+    sensors_event_t _event; //zadeklarowane raz dla stabilności
 
 public:
     float val_lux;

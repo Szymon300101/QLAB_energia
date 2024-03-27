@@ -4,37 +4,37 @@
 #include "log.h"
 #include "display.h"
 #include "sensors.h"
+#include "lights.h"
+#include "regulators/regulator.h"
 
-// Tsl tsl_sensor = Tsl(1,0x39);
-// VcSensor vc_sensor = VcSensor(0x70);
-
-float led_pwm = 10;
-float led_p = 0.03;
-float setpoint = 500;
+Regulator reg1;
 
 void setup(void) 
 {
   Serial.begin(115200);
   delay(5000);
-    
-  // Serial.println("Hello!");
 
   // Display::begin();
-  // tsl_sensor.begin();
-  // vc_sensor.begin();
   Log::begin();
   Sensors::begin();
+  Lights::begin();
 
-  analogWrite(32, 200);
+  Serial.println("SETUP DONE");
 }
 
 void loop(void) 
 {
-  Serial.print(Sensors::tslSensors[0][1].read_lux());
+  Serial.print(Sensors::tsl_sensors[0][1].read_lux());
   Serial.print("   ");
 
-  Sensors::vcSensors[0].read();
-  Serial.println(Sensors::vcSensors[0].current_mA);
+  Sensors::vc_sensors[0].read();
+  Serial.println(Sensors::vc_sensors[0].current_mA);
+
+  Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
+
+  int qls_lights_u = reg1.regulate_PID(500,sensor_data.avg_active_qls, 0);
+
+  Lights::setValuesForActiveRooms(qls_lights_u, 0);
 
 
   // tsl_sensor.read_lux();
