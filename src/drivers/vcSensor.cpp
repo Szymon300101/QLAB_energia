@@ -1,5 +1,5 @@
 #include "vcSensor.h"
-#include "state.h"
+#include "../state.h"
 
 VcSensor::VcSensor(byte i2c_addr) : ina219(i2c_addr)
 {

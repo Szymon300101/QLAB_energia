@@ -1,8 +1,8 @@
 #ifndef SENSORS_H
 #define SENSORS_H
 
-#include "tsl.h"
-#include "vcSensor.h"
+#include "drivers/tsl.h"
+#include "drivers/vcSensor.h"
 
 #define ROOM_NUM 4
 #define TSL_NUM 6

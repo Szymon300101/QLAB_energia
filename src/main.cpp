@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "tsl.h"
-#include "vcSensor.h"
+#include "drivers/tsl.h"
+#include "drivers/vcSensor.h"
 #include "log.h"
 #include "display.h"
 #include "sensors.h"
