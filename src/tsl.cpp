@@ -1,4 +1,5 @@
 #include "tsl.h"
+#include "state.h"
 
 Tsl::Tsl(byte mux_addr, byte i2c_adrr) : _sensor(i2c_adrr, -1)
 {

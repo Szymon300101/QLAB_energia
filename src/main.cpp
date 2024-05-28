@@ -9,6 +9,9 @@
 
 Regulator reg1;
 
+unsigned long loop_start_time;
+unsigned int last_loop_time=100;
+
 void setup(void) 
 {
   Serial.begin(115200);
@@ -24,17 +27,45 @@ void setup(void)
 
 void loop(void) 
 {
-  Serial.print(Sensors::tsl_sensors[0][1].read_lux());
-  Serial.print("   ");
+  loop_start_time = millis();
 
-  Sensors::vc_sensors[0].read();
-  Serial.println(Sensors::vc_sensors[0].current_mA);
+  // Serial.print(Sensors::tsl_sensors[0][0].read_lux());
+  // Serial.print("   ");
+  // Serial.print(Sensors::tsl_sensors[0][1].read_lux());
+  // Serial.print("   ");
+  // Serial.print(Sensors::tsl_sensors[0][2].read_lux());
+  // Serial.print("   ");
+  // Serial.print(Sensors::tsl_sensors[0][3].read_lux());
+  // Serial.print("   ");
+  // Serial.print(Sensors::tsl_sensors[0][4].read_lux());
+  // Serial.print("   ");
+  // Serial.print(Sensors::tsl_sensors[0][5].read_lux());
+  // Serial.print("   ");
+
+  Sensors::tsl_sensors[0][0].read_lux();
+  Sensors::tsl_sensors[0][1].read_lux();
+  Sensors::tsl_sensors[0][2].read_lux();
+  Sensors::tsl_sensors[0][3].read_lux();
+  Sensors::tsl_sensors[0][4].read_lux();
+  Sensors::tsl_sensors[0][5].read_lux();
+
+  // Sensors::vc_sensors[0].read();
+  // Serial.print(Sensors::vc_sensors[0].busvoltage_V);
+  // Serial.print("   ");
+  // Serial.println(Sensors::vc_sensors[0].current_mA);
 
   Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
 
-  int qls_lights_u = reg1.regulate_PID(500,sensor_data.avg_active_qls, 0);
+  int qls_lights_u = reg1.regulate_PID(500,sensor_data.avg_active_qls, last_loop_time);
 
   Lights::setValuesForActiveRooms(qls_lights_u, 0);
+
+  Serial.print(500);
+  Serial.print(" ");
+  Serial.print(sensor_data.avg_active_qls);
+  Serial.print(" ");
+  Serial.print(qls_lights_u);
+  Serial.println("");
 
 
   // tsl_sensor.read_lux();
@@ -68,5 +99,7 @@ void loop(void)
 
   // display.showNumberDec(vc_sensor.current_mA);
 
-  delay(500);
+  delay(100);
+
+  last_loop_time = millis() - loop_start_time;
 }

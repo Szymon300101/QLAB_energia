@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include "state.h"
 
 #define MUX_I2C_ADDR 0x70
 

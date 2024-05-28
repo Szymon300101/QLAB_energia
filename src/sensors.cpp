@@ -1,4 +1,5 @@
 #include "sensors.h"
+#include "state.h"
 
 
 namespace Sensors
@@ -14,7 +15,12 @@ namespace Sensors
 
     void begin()
     {
+        tsl_sensors[0][0].begin();
         tsl_sensors[0][1].begin();
+        tsl_sensors[0][2].begin();
+        tsl_sensors[0][3].begin();
+        tsl_sensors[0][4].begin();
+        tsl_sensors[0][5].begin();
         vc_sensors[0].begin();
 
         // for (int r = 0; r < ROOM_NUM; r++) {

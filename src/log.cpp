@@ -43,7 +43,7 @@ namespace Log
         }
 
         //print dateTime
-        _filePrintDateTime(logFile);    logFile.print("; ");
+        _filePrintDateTime(&logFile);    logFile.print("; ");
 
         //print lights values
         logFile.print(Lights::values[0]);           logFile.print("; ");
@@ -71,6 +71,7 @@ namespace Log
 
         
 
+        logFile.println(" ");
         logFile.close();
     }
 
@@ -85,10 +86,11 @@ namespace Log
         }
 
         //print dateTime
-        _filePrintDateTime(logFile);    logFile.print("; ");
+        _filePrintDateTime(&logFile);    logFile.print("; ");
         logFile.print(code);            logFile.print("; ");
         logFile.print(msg);            logFile.print("; ");
 
+        logFile.println(" ");
         logFile.close();
     }
 
@@ -127,16 +129,16 @@ namespace Log
         return true;
     }
 
-    void _filePrintDateTime(FsFile logFile)
+    void _filePrintDateTime(FsFile *logFile)
     {
         DateTime timeNow = rtc.now();
 
-        logFile.print(timeNow.year());      logFile.print("-");
-        logFile.print(timeNow.month());     logFile.print("-");
-        logFile.print(timeNow.day());       logFile.print(" ");
-        logFile.print(timeNow.hour());      logFile.print(":");
-        logFile.print(timeNow.minute());    logFile.print(":");
-        logFile.print(timeNow.second());
+        (*logFile).print(timeNow.year());      (*logFile).print("-");
+        (*logFile).print(timeNow.month());     (*logFile).print("-");
+        (*logFile).print(timeNow.day());       (*logFile).print(" ");
+        (*logFile).print(timeNow.hour());      (*logFile).print(":");
+        (*logFile).print(timeNow.minute());    (*logFile).print(":");
+        (*logFile).print(timeNow.second());
     }
 
     void _serialPrintDateTime()

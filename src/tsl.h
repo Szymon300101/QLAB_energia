@@ -5,7 +5,6 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
 #include "mux.h"
-#include "state.h"
 
 #define INTEGR_TIME TSL2561_INTEGRATIONTIME_101MS
 

@@ -1,4 +1,5 @@
 #include "mux.h"
+#include "state.h"
 
 namespace Mux
 {

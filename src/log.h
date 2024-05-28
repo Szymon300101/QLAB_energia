@@ -17,7 +17,7 @@ namespace Log
 
     bool _tryReadTimeFromFile();
 
-    void _filePrintDateTime(FsFile logFile);
+    void _filePrintDateTime(FsFile *logFile);
 
     void _serialPrintDateTime();
 
