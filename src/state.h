@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "log.h"
 #include "display.h"
+#include "utils/integrator.h"
 
 enum ErrorCode{
     generic         = 00,
@@ -17,8 +18,11 @@ namespace State
     extern bool qls_open;
     extern bool ref_open;
 
+    extern Integrator ws_integrators[4];
+
     byte getQlsActiveRoom();
     byte getRefActiveRoom();
+
 
     void throwError(bool code, const char* msg);
 }

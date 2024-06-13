@@ -49,7 +49,7 @@ void loop(void)
   Sensors::tsl_sensors[0][4].read_lux();
   Sensors::tsl_sensors[0][5].read_lux();
 
-  // Sensors::vc_sensors[0].read();
+  Sensors::vc_sensors[0].read();
   // Serial.print(Sensors::vc_sensors[0].busvoltage_V);
   // Serial.print("   ");
   // Serial.println(Sensors::vc_sensors[0].current_mA);
@@ -102,4 +102,6 @@ void loop(void)
   delay(100);
 
   last_loop_time = millis() - loop_start_time;
+
+  State::ws_integrators[0].increment(Sensors::vc_sensors[0].power_mW/1000,last_loop_time);
 }

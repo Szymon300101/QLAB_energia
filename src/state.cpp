@@ -6,6 +6,7 @@ namespace State
     bool qls_open = true;
     bool ref_open = true;
 
+    extern Integrator ws_integrators[4] = {Integrator(),Integrator(),Integrator(),Integrator()};
     
     byte getQlsActiveRoom()
     {
