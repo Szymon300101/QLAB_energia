@@ -21,10 +21,10 @@ void setup(void)
 {
   Serial.begin(115200);
   pinMode(5, OUTPUT);
-  while (!Serial) {
-      // will pause Zero, Leonardo, etc until serial console opens
-      delay(1);
-  }
+  // while (!Serial) {
+  //     // will pause Zero, Leonardo, etc until serial console opens
+  //     delay(1);
+  // }
     
   Serial.println("Hello!");
 
@@ -56,6 +56,8 @@ void setup(void)
 
   
   display.setBrightness(0x0f);
+
+  analogWrite(5,123);
 }
 
 void loop(void) 
@@ -80,12 +82,12 @@ void loop(void)
 
   // analogWrite(5, map(analogRead(A0), 0, 1025, 0, 200));
 
-  led_pwm += (setpoint - event.light)*led_p;
-  led_pwm = min(255, max(0, led_pwm));
-  analogWrite(5,led_pwm);
+  // led_pwm += (setpoint - event.light)*led_p;
+  // led_pwm = min(255, max(0, led_pwm));
+  // analogWrite(5,led_pwm);
 
-  Serial.print("PWM: ");
-  Serial.println(led_pwm);
+  // Serial.print("PWM: ");
+  // Serial.println(led_pwm);
 
 
   float shuntvoltage = 0;
@@ -107,7 +109,8 @@ void loop(void)
   // Serial.print("Power:         "); Serial.print(power_mW); Serial.println(" mW");
   Serial.println("");
 
-  display.showNumberDec(current_mA);
+  // display.showNumberDec(current_mA);
+  display.showNumberDec(event.light);
 
   delay(200);
 }
