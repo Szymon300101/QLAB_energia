@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include "log.h"
 #include "display.h"
+#include "sensors.h"
+#include "config.h"
 #include "utils/integrator.h"
 
 enum ErrorCode{
@@ -15,6 +17,7 @@ enum ErrorCode{
 
 namespace State
 {
+    extern bool system_active;
     extern bool qls_open;
     extern bool ref_open;
 
@@ -23,6 +26,7 @@ namespace State
     byte getQlsActiveRoom();
     byte getRefActiveRoom();
 
+    void updateState();
 
     void throwError(bool code, const char* msg);
 }

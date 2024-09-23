@@ -34,6 +34,18 @@ namespace Lights
         _updateAll();
     }
 
+    void turnOff()
+    {
+        values[0] = 0;
+        values[1] = 0;
+        values[2] = 0;
+        values[3] = 0;
+        parrot_values[0] = 0;
+        parrot_values[1] = 0;
+        
+        _updateAll();
+    }
+
     void _updateAll()
     {
         analogWrite(PIN_LIGHT_0, values[0]);

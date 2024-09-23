@@ -56,22 +56,30 @@ namespace Sensors
         float curr_val;
 
         data.avg_active_qls = 0;
-        data.max_active_qls = 0;
         for (int t = 0; t < TSL_NUM; t++){
             curr_val = tsl_sensors[State::getQlsActiveRoom()][t].val_lux;
             data.avg_active_qls += curr_val;
-            if(curr_val > data.max_active_qls) data.max_active_qls = curr_val;
         }
         data.avg_active_qls /= TSL_NUM;
 
         data.avg_active_ref = 0;
-        data.max_active_ref = 0;
         for (int t = 0; t < TSL_NUM; t++){
             curr_val = tsl_sensors[State::getRefActiveRoom()][t].val_lux;
             data.avg_active_ref += curr_val;
-            if(curr_val > data.max_active_ref) data.max_active_ref = curr_val;
         }
         data.avg_active_ref /= TSL_NUM;
+
+        data.max_open_qls = 0;
+        for (int t = 0; t < TSL_NUM; t++){
+            curr_val = tsl_sensors[0][t].val_lux;
+            if(curr_val > data.max_open_qls) data.max_open_qls = curr_val;
+        }
+
+        data.max_open_ref = 0;
+        for (int t = 0; t < TSL_NUM; t++){
+            curr_val = tsl_sensors[2][t].val_lux;
+            if(curr_val > data.max_open_ref) data.max_open_ref = curr_val;
+        }
 
         return data;
     }

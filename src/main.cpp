@@ -35,19 +35,7 @@ void loop(void)
 {
   loop_start_time = millis();
 
-  // Serial.print(Sensors::tsl_sensors[0][0].read_lux());
-  // Serial.print("   ");
-  // Serial.print(Sensors::tsl_sensors[0][1].read_lux());
-  // Serial.print("   ");
-  // Serial.print(Sensors::tsl_sensors[0][2].read_lux());
-  // Serial.print("   ");
-  // Serial.print(Sensors::tsl_sensors[0][3].read_lux());
-  // Serial.print("   ");
-  // Serial.print(Sensors::tsl_sensors[0][4].read_lux());
-  // Serial.print("   ");
-  // Serial.print(Sensors::tsl_sensors[0][5].read_lux());
-  // Serial.print("   ");
-
+  State::updateState();
   Sensors::readAll();
   // Sensors::printRoom(0);
   // Serial.print("|||\t");
@@ -72,21 +60,28 @@ void loop(void)
   // Serial.print(sensor_data.avg_active_qls);
   // Serial.println(" ");
 
-  Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
+  if(State::system_active)
+  {
+    Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
 
-  int qls_lights_u = reg_qls.regulate_PID(300,sensor_data.avg_active_qls, last_loop_time);
-  int ref_lights_u = reg_ref.regulate_PID(500,sensor_data.avg_active_ref, last_loop_time);
+    int qls_lights_u = reg_qls.regulate_PID(300,sensor_data.avg_active_qls, last_loop_time);
+    int ref_lights_u = reg_ref.regulate_PID(500,sensor_data.avg_active_ref, last_loop_time);
 
-  Lights::setValuesForActiveRooms(qls_lights_u, ref_lights_u);
+    Lights::setValuesForActiveRooms(qls_lights_u, ref_lights_u);
 
-  Serial.print(sensor_data.avg_active_qls);
-  Serial.print("\t");
-  Serial.print(qls_lights_u);
-  Serial.print("\t");
-  Serial.print(sensor_data.avg_active_ref);
-  Serial.print("\t");
-  Serial.print(ref_lights_u);
-  Serial.print("\n");
+    Serial.print(sensor_data.avg_active_qls);
+    Serial.print("\t");
+    Serial.print(qls_lights_u);
+    Serial.print("\t");
+    Serial.print(sensor_data.avg_active_ref);
+    Serial.print("\t");
+    Serial.print(ref_lights_u);
+    Serial.print("\n");
+  }else
+  {
+    Lights::turnOff();
+  }
+  
 
 
   // 
@@ -97,6 +92,7 @@ void loop(void)
   // Serial.print(" ");
   // Serial.print(qls_lights_u);
   // Serial.println("");
+
 
   delay(100);
 

@@ -25,6 +25,8 @@ namespace Log
 
     void saveAllData();
 
+    bool isWorkTime();
+
     void saveErrorInfo(byte code, const char* msg);
 }
 

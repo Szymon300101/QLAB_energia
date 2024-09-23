@@ -28,6 +28,8 @@ namespace Lights
 
     void setValuesForActiveRooms(byte qls_value, byte ref_value);
 
+    void turnOff();
+
 
 
 }

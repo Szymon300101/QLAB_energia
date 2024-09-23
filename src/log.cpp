@@ -152,4 +152,19 @@ namespace Log
         Serial.print(timeNow.minute());    Serial.print(":");
         Serial.println(timeNow.second());
     }
+    
+    bool isWorkTime()
+    {
+        DateTime timeNow = rtc.now();
+
+        if(timeNow.dayOfTheWeek()==0 || timeNow.dayOfTheWeek()==0)
+            return false;
+
+        if(timeNow.hour()<DAY_START_HOUR || timeNow.hour()>DAY_END_HOUR)
+            return false;
+
+        //holiday???
+
+        return true;
+    }
 }
