@@ -53,6 +53,8 @@ namespace Sensors
 
     void readAll();
 
+    void printRoom(int room_id);
+
     CombinedTslData getCombinedTslData();
 }
 

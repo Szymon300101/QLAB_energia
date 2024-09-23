@@ -4,8 +4,8 @@
 #include "Arduino.h"
 
 
-#define DEFAULT_REG_P 0.1
-#define DEFAULT_REG_I 2
+#define DEFAULT_REG_P 0.02
+#define DEFAULT_REG_I 0.5
 #define DEFAULT_REG_D 0
 
 

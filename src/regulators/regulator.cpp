@@ -36,9 +36,9 @@ int Regulator::regulate_PID(int setpoint, int y, int last_loop_time)
 
     float u = 100 + _p*(p_term + i_term + d_term);
 
-    u = constrain(u, 0,200);
+    u = constrain(u, 0,220);
 
-    if(u == 0 || u == 200) //anti-windup
+    if(u == 0 || u == 220) //anti-windup
     _err_sum -= err;
 
     return u;
