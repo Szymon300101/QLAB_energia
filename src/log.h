@@ -7,25 +7,18 @@
 #include "state.h"
 #include "sensors.h"
 #include "lights.h"
+#include "drivers/rtc.h"
 
 #define SD_CS_PIN 5
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(16))
 
 namespace Log
 {
-    extern RTC_DS1307 rtc;
+    extern SdFs sd;
 
-    bool _tryReadTimeFromFile();
-
-    void _filePrintDateTime(FsFile *logFile);
-
-    void _serialPrintDateTime();
-
-    bool begin();
+    void begin();
 
     void saveAllData();
-
-    bool isWorkTime();
 
     void saveErrorInfo(byte code, const char* msg);
 }

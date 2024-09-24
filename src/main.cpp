@@ -2,6 +2,7 @@
 #include "drivers/tsl.h"
 #include "drivers/vcSensor.h"
 #include "log.h"
+#include "drivers/rtc.h"
 #include "display.h"
 #include "sensors.h"
 #include "lights.h"
@@ -21,6 +22,7 @@ void setup(void)
 
   // Display::begin();
   Log::begin();
+  Rtc::begin();
   Sensors::begin();
   Lights::begin();
 

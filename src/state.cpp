@@ -26,19 +26,19 @@ namespace State
     {
         Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
 
-        if(Log::isWorkTime())
+        if(Rtc::isWorkTime())
         {
             system_active = true;
             if(qls_open)
             {
-                if(sensor_data.max_open_qls > BLIND_CLOSE_TRES && (millis() - qls_last_state_change_time < ROOM_STATE_HYSTERESIS_TIME))
+                if(sensor_data.max_open_qls > BLIND_CLOSE_TRES && (millis() - qls_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME))
                 {
                     qls_open = false;
                     qls_last_state_change_time = millis();
                 }
             }else
             {
-                if((sensor_data.max_open_qls < BLIND_OPEN_TRES && (millis() - qls_last_state_change_time < ROOM_STATE_HYSTERESIS_TIME)))
+                if((sensor_data.max_open_qls < BLIND_OPEN_TRES && (millis() - qls_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME)))
                 {
                     qls_open = true;
                     qls_last_state_change_time = millis();
