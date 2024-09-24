@@ -13,6 +13,7 @@ Regulator reg_ref;
 
 unsigned long loop_start_time;
 unsigned int last_loop_time=100;
+unsigned long last_log_event;
 
 void setup(void) 
 {
@@ -39,6 +40,13 @@ void loop(void)
 
   State::updateState();
   Sensors::readAll();
+
+  if(millis() - last_log_event > LOG_INTERVAL)
+  {
+    Log::saveAllData();
+    last_log_event = millis();
+  }
+  
   // Sensors::printRoom(0);
   // Serial.print("|||\t");
   // Sensors::printRoom(1);

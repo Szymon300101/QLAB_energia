@@ -8,7 +8,7 @@
 #define DAY_START_HOUR      1
 #define DAY_END_HOUR        23
 
-
+#define LOG_INTERVAL        1000*60
 
 
 #endif
