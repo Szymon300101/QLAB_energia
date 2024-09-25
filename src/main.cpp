@@ -21,7 +21,7 @@ void setup(void)
   Wire.begin(21,22,400000);
   delay(5000);
 
-  // Display::begin();
+  Display::begin();
   Log::begin();
   Rtc::begin();
   Sensors::begin();
@@ -40,6 +40,7 @@ void loop(void)
 
   State::updateState();
   Sensors::readAll();
+  Display::displayStatus();
 
   if(millis() - last_log_event > LOG_INTERVAL)
   {

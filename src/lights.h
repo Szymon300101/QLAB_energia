@@ -15,7 +15,7 @@
 #define PIN_PARROT_0    27
 #define PIN_PARROT_1    14
 
-#define PARROT_VALUE 80
+#define PARROT_VALUE 70
 
 namespace Lights
 {

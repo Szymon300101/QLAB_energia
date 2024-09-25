@@ -51,9 +51,9 @@ namespace Log
         //print current sensors
         for (int i = 0; i < VC_NUM; i++)
         {
-            logFile.print(Sensors::vc_sensors[0].loadvoltage_V);     logFile.print("; ");
-            logFile.print(Sensors::vc_sensors[0].current_mA);        logFile.print("; ");
-            logFile.print(Sensors::vc_sensors[0].power_mW);          logFile.print("; ");
+            logFile.print(Sensors::vc_sensors[i].loadvoltage_V);     logFile.print("; ");
+            logFile.print(Sensors::vc_sensors[i].current_mA);        logFile.print("; ");
+            logFile.print(Sensors::vc_sensors[i].power_mW);          logFile.print("; ");
         }
 
         //print integrators

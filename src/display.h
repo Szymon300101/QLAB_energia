@@ -4,13 +4,15 @@
 #include <Arduino.h>
 #include <TM1637Display.h>
 #include "utils/blinker.h"
+#include "state.h"
+#include "sensors.h"
 
-#define DISPLAY_BRIGHTNESS 0x0f
+#define DISPLAY_BRIGHTNESS 05
 
-#define STATUS_LED_PIN_A1 1
-#define STATUS_LED_PIN_A2 3
-#define STATUS_LED_PIN_B1 16
-#define STATUS_LED_PIN_B2 17
+#define STATUS_LED_PIN_A1 2
+#define STATUS_LED_PIN_A2 15
+#define STATUS_LED_PIN_B1 12
+#define STATUS_LED_PIN_B2 0
 
 namespace Display
 {
@@ -18,6 +20,7 @@ namespace Display
     extern TM1637Display display_B;
 
     void begin();
+    void displayStatus();
     void displayErrorCode(byte code);
 }
 

@@ -10,7 +10,7 @@ namespace State
     unsigned long qls_last_state_change_time = 0;
     unsigned long ref_last_state_change_time = 0;
 
-    extern Integrator ws_integrators[4] = {Integrator(),Integrator(),Integrator(),Integrator()};
+    Integrator ws_integrators[3] = {Integrator(),Integrator(),Integrator()};
     
     byte getQlsActiveRoom()
     {

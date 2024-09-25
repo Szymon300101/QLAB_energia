@@ -21,7 +21,7 @@ namespace State
     extern bool qls_open;
     extern bool ref_open;
 
-    extern Integrator ws_integrators[4];
+    extern Integrator ws_integrators[3];
 
     byte getQlsActiveRoom();
     byte getRefActiveRoom();
