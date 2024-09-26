@@ -7,6 +7,7 @@
 #include "sensors.h"
 #include "lights.h"
 #include "regulators/regulator.h"
+#include "server/server.h"
 
 Regulator reg_qls;
 Regulator reg_ref;
@@ -26,6 +27,7 @@ void setup(void)
   Rtc::begin();
   Sensors::begin();
   Lights::begin();
+  WebServer::begin();
 
   Serial.println("SETUP DONE");
 
