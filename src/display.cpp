@@ -43,7 +43,7 @@ namespace Display
 
     void displayStatus()
     {
-        display_A.showNumberDec(Sensors::vc_sensors[0].power_mW + Sensors::vc_sensors[3].power_mW);
+        display_A.showNumberDec(Sensors::vc_sensors[0].power_mW + Sensors::vc_sensors[2].power_mW);
         display_B.showNumberDec(Sensors::vc_sensors[1].power_mW);
 
         digitalWrite(STATUS_LED_PIN_A1,  State::qls_open);
@@ -62,5 +62,13 @@ namespace Display
         digitalWrite(STATUS_LED_PIN_A2, leds_on);
         digitalWrite(STATUS_LED_PIN_B1, leds_on);
         digitalWrite(STATUS_LED_PIN_B2, leds_on);
+    }
+
+    void clearLed()
+    {
+        digitalWrite(STATUS_LED_PIN_A1, LOW);
+        digitalWrite(STATUS_LED_PIN_A2, LOW);
+        digitalWrite(STATUS_LED_PIN_B1, LOW);
+        digitalWrite(STATUS_LED_PIN_B2, LOW);
     }
 }

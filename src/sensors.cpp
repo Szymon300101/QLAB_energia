@@ -10,7 +10,7 @@ namespace Sensors
                                             {Tsl(6,0x29), Tsl(6,0x39), Tsl(6,0x49), Tsl(7,0x29), Tsl(7,0x39), Tsl(7,0x49)}};    //room 3
     
                                     //GND,GND        GND, VCC         VCC, GND
-    VcSensor vc_sensors[VC_NUM] = {VcSensor(0x40), VcSensor(0x41), VcSensor(0x44)};
+    VcSensor vc_sensors[VC_NUM] = {VcSensor(0x40), VcSensor(0x44), VcSensor(0x41)};
 
 
     void begin()

@@ -42,7 +42,6 @@ void loop(void)
 
   State::updateState();
   Sensors::readAll();
-  Display::displayStatus();
 
   if(millis() - last_log_event > LOG_INTERVAL)
   {
@@ -58,9 +57,12 @@ void loop(void)
   // Serial.print("|||\t");
   // Sensors::printRoom(3);
 
-  // Serial.print(Sensors::vc_sensors[0].busvoltage_V);
-  // Serial.print("   ");
-  // Serial.println(Sensors::vc_sensors[0].current_mA);
+  Serial.print(Sensors::vc_sensors[0].current_mA);
+  Serial.print("   ");
+  Serial.print(Sensors::vc_sensors[1].current_mA);
+  Serial.print("   ");
+  Serial.print(Sensors::vc_sensors[2].current_mA);
+  Serial.print("   ");
 
   // Serial.print("|\t");
   // State::qls_open=false;
@@ -106,8 +108,11 @@ void loop(void)
   // Serial.print(qls_lights_u);
   // Serial.println("");
 
-
+  Display::clearLed();
+  
   delay(100);
+
+  Display::displayStatus();
 
   last_loop_time = millis() - loop_start_time;
 

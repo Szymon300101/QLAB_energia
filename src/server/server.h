@@ -7,6 +7,7 @@
 #include "SPIFFS.h"
 
 #include "../sensors.h"
+#include "../state.h"
 #include "secrets.h"        //if secrets are not defined duplicate secrets_template.h and rename to secrets.h
 
 namespace WebServer

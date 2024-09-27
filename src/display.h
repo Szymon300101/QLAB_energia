@@ -22,6 +22,7 @@ namespace Display
     void begin();
     void displayStatus();
     void displayErrorCode(byte code);
+    void clearLed();
 }
 
 #endif
