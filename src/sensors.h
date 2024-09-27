@@ -12,8 +12,8 @@ namespace Sensors
 {
     struct CombinedTslData
     {
-        float avg_active_qls;
-        float avg_active_ref;
+        float min_active_qls;
+        float min_active_ref;
         
         float max_open_qls;
         float max_open_ref;

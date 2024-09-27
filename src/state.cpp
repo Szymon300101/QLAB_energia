@@ -45,7 +45,21 @@ namespace State
                 }
             }
 
-            //same for ref
+            if(ref_open)
+            {
+                if(sensor_data.max_open_ref > BLIND_CLOSE_TRES && (millis() - ref_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME))
+                {
+                    ref_open = false;
+                    qls_last_state_change_time = millis();
+                }
+            }else
+            {
+                if((sensor_data.max_open_ref < BLIND_OPEN_TRES && (millis() - ref_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME)))
+                {
+                    ref_open = true;
+                    qls_last_state_change_time = millis();
+                }
+            }
 
         }else{
             system_active = false;
