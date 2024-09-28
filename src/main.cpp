@@ -20,7 +20,7 @@ void setup(void)
 {
   Serial.begin(115200);
   Wire.begin(21,22,400000);
-  delay(5000);
+  delay(500);
 
   Display::begin();
   Log::begin();
@@ -30,51 +30,24 @@ void setup(void)
   WebServer::begin();
 
   Serial.println("SETUP DONE");
-
-  State::qls_open=true;
-  // State::ref_open=true;
-  Lights::setValuesForActiveRooms(128, 128);
 }
 
 void loop(void) 
 {
   loop_start_time = millis();
 
+  //update
   State::updateState();
   Sensors::readAll();
 
+  //log
   if(millis() - last_log_event > LOG_INTERVAL)
   {
     Log::saveAllData();
     last_log_event = millis();
   }
-  
-  // Sensors::printRoom(0);
-  // Serial.print("|||\t");
-  // Sensors::printRoom(1);
-  // Serial.print("|||\t");
-  // Sensors::printRoom(2);
-  // Serial.print("|||\t");
-  // Sensors::printRoom(3);
 
-  Serial.print(Sensors::vc_sensors[0].current_mA);
-  Serial.print("   ");
-  Serial.print(Sensors::vc_sensors[1].current_mA);
-  Serial.print("   ");
-  Serial.print(Sensors::vc_sensors[2].current_mA);
-  Serial.print("   ");
-
-  // Serial.print("|\t");
-  // State::qls_open=false;
-  // Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
-  // Serial.print(sensor_data.avg_active_qls);
-  // Serial.print("|\t");
-  
-  // State::qls_open=true;
-  // sensor_data = Sensors::getCombinedTslData();
-  // Serial.print(sensor_data.avg_active_qls);
-  // Serial.println(" ");
-
+  //control
   if(State::system_active)
   {
     Sensors::CombinedTslData sensor_data = Sensors::getCombinedTslData();
@@ -96,29 +69,18 @@ void loop(void)
   {
     Lights::turnOff();
   }
-  
 
-
-  // 
-
-  // Serial.print(500);
-  // Serial.print(" ");
-  // Serial.print(sensor_data.avg_active_qls);
-  // Serial.print(" ");
-  // Serial.print(qls_lights_u);
-  // Serial.println("");
-
+  //display & delay
   Display::clearLed();
-
   delay(100);
-
   Display::displayStatus();
 
+  //loop time
   last_loop_time = millis() - loop_start_time;
+  Serial.print("Loop time: ");
+  Serial.println(last_loop_time);
 
-  // Serial.print("Loop time: ");
-  // Serial.println(last_loop_time);
-
+  //integrators
   State::ws_integrators[0].increment(Sensors::vc_sensors[0].power_mW/1000,last_loop_time);
   State::ws_integrators[1].increment(Sensors::vc_sensors[1].power_mW/1000,last_loop_time);
   State::ws_integrators[2].increment(Sensors::vc_sensors[2].power_mW/1000,last_loop_time);

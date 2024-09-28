@@ -81,4 +81,13 @@ namespace Sensors
 
         return data;
     }
+
+    float getRoomAvg(int room_id)
+    {
+        float sum = 0;
+        for (int t = 0; t < TSL_NUM; t++){
+            sum+=tsl_sensors[room_id][t].val_lux;
+        }
+        return sum/TSL_NUM;
+    }
 }

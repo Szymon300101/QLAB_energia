@@ -56,6 +56,8 @@ namespace Sensors
     void printRoom(int room_id);
 
     CombinedTslData getCombinedTslData();
+
+    float getRoomAvg(int room_id);
 }
 
 
