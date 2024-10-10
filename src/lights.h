@@ -3,10 +3,7 @@
 
 #include "Arduino.h"
 #include "state.h"
-
-
-#define LIGHT_NUM 4
-#define PARROT_NUM 4
+#include "config.h"
 
 #define PIN_LIGHT_0     32
 #define PIN_LIGHT_1     33
@@ -15,12 +12,12 @@
 #define PIN_PARROT_0    27
 #define PIN_PARROT_1    14
 
-#define PARROT_VALUE 70
 
+//Driver for all internal LEDs called "Lights".
 namespace Lights
 {
-    extern byte values[LIGHT_NUM];
-    extern byte parrot_values[PARROT_NUM];
+    extern byte values[4];
+    extern byte parrot_values[2];
 
     void begin();
 
@@ -29,8 +26,6 @@ namespace Lights
     void setValuesForActiveRooms(byte qls_value, byte ref_value);
 
     void turnOff();
-
-
 
 }
 

@@ -2,8 +2,8 @@
 
 namespace Lights
 {
-    byte values[LIGHT_NUM] = {0,0,0,0};
-    byte parrot_values[PARROT_NUM] = {0,0};
+    byte values[4] = {0,0,0,0};
+    byte parrot_values[2] = {0,0};
 
     void begin()
     {

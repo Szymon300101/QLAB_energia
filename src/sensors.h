@@ -8,6 +8,7 @@
 #define TSL_NUM 6
 #define VC_NUM 3
 
+//High-level menager for all ALS and VC sensors
 namespace Sensors
 {
     struct CombinedTslData
@@ -34,13 +35,23 @@ namespace Sensors
         room IDs:
         0 - QLS open
         1 - QLS closed
-        2 - conventional open
-        3 - conventional closed
+        2 - REF open
+        3 - REF closed
     
         voltage sensors IDs:
         0 - QLS     - room 0, 1
-        1 - conv.   - room 2, 3
+        1 - REF   - room 2, 3
         2 - QLS parrots
+
+        tsl address switch:
+        Gnd - 0x29
+        Float - 0x39
+        Vcc - 0x49
+
+        ina address switch:
+        Gnd, Gnd - 0x40
+        Gnd, Vcc - 0x44
+        Vcc, Gnd - 0x41
     */
 
     //addresses set up in 'sensors.cpp'
@@ -52,8 +63,6 @@ namespace Sensors
     void begin();
 
     void readAll();
-
-    void printRoom(int room_id);
 
     CombinedTslData getCombinedTslData();
 

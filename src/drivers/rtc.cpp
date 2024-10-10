@@ -5,6 +5,7 @@
 namespace Rtc
 {
     RTC_DS1307 rtc;
+    DateTime timeNow;
 
     void begin()
     {
@@ -29,7 +30,7 @@ namespace Rtc
 
     void filePrintDateTime(FsFile *logFile)
     {
-        DateTime timeNow = rtc.now();
+        timeNow = rtc.now();
 
         (*logFile).print(timeNow.year());      (*logFile).print("-");
         (*logFile).print(timeNow.month());     (*logFile).print("-");
@@ -41,7 +42,7 @@ namespace Rtc
 
     void serialPrintDateTime()
     {
-        DateTime timeNow = rtc.now();
+        timeNow = rtc.now();
 
         Serial.print(timeNow.year());      Serial.print("-");
         Serial.print(timeNow.month());     Serial.print("-");
@@ -53,15 +54,13 @@ namespace Rtc
     
     bool isWorkTime()
     {
-        DateTime timeNow = rtc.now();
+        timeNow = rtc.now();
 
         if(timeNow.dayOfTheWeek()==0 || timeNow.dayOfTheWeek()==0)
             return false;
 
-        if(timeNow.hour()<DAY_START_HOUR || timeNow.hour()>DAY_END_HOUR)
+        if(timeNow.hour()<DAY_START_HOUR || timeNow.hour()>=DAY_END_HOUR)
             return false;
-
-        //holiday???
 
         return true;
     }

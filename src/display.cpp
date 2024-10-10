@@ -5,7 +5,7 @@ namespace Display
     TM1637Display display_A = TM1637Display(4, 13); // CLK_PIN, DIO_PIN
     TM1637Display display_B = TM1637Display(17, 16); // CLK_PIN, DIO_PIN
 
-    Blinker _error_blinker = Blinker(100, 2000);
+    Blinker _error_blinker = Blinker(500, 2000);
 
     const uint8_t _error_segments[] = {
         SEG_A | SEG_D | SEG_E | SEG_F | SEG_G, // E
@@ -25,8 +25,8 @@ namespace Display
         pinMode(STATUS_LED_PIN_B2, OUTPUT);
 
         
-        display_A.showNumberDec(1111);
-        display_B.showNumberDec(2222);
+        display_A.showNumberDec(2222);
+        display_B.showNumberDec(1111);
 
         digitalWrite(STATUS_LED_PIN_A1, HIGH);
         digitalWrite(STATUS_LED_PIN_A2, HIGH);
@@ -35,13 +35,10 @@ namespace Display
 
         delay(500);
 
-        digitalWrite(STATUS_LED_PIN_A1, LOW);
-        digitalWrite(STATUS_LED_PIN_A2, LOW);
-        digitalWrite(STATUS_LED_PIN_B1, LOW);
-        digitalWrite(STATUS_LED_PIN_B2, LOW);
+        clearLed();
     }
 
-    void displayStatus()
+    void displayState()
     {
         display_A.showNumberDec(Sensors::vc_sensors[0].power_mW + Sensors::vc_sensors[2].power_mW);
         display_B.showNumberDec(Sensors::vc_sensors[1].power_mW);

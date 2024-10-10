@@ -34,12 +34,14 @@ int Regulator::regulate_PID(int setpoint, int y, int last_loop_time)
         _last_err = err;
     }
 
+    //Regulator has a bias of 100 witch helps with response times itp.
+    //It is not something normal PIDs have, but it works for me.
     float u = 100 + _p*(p_term + i_term + d_term);
 
-    u = constrain(u, 0,220);
+    u = constrain(u, 0, REG_MAX_VALUE);
 
-    if(u == 0 || u == 220) //anti-windup
-    _err_sum -= err;
+    if(_i>0 && (u == 0 || u == REG_MAX_VALUE)) //anti-windup
+        _err_sum -= err;
 
     return u;
 }

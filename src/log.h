@@ -12,6 +12,7 @@
 #define SD_CS_PIN 5
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(16))
 
+//Namespace menaging sd card and performing loging of data and errors
 namespace Log
 {
     extern SdFs sd;

@@ -2,14 +2,10 @@
 #define REGULATOR_H
 
 #include "Arduino.h"
+#include "../config.h"
 
 
-#define DEFAULT_REG_P 0.02
-#define DEFAULT_REG_I 0.5
-#define DEFAULT_REG_D 0
-
-
-//lux value continuus regulator
+//lux value continuus PID (or PI) regulator
 class Regulator
 {
     float _p, _i, _d;

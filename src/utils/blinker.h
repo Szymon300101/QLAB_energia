@@ -3,9 +3,10 @@
 
 #include <Arduino.h>
 
+//class for semi-asynchronous led blinking
+//tick() or isOn() need to be called relatevly often to achive accouracy
 class Blinker
 {
-
     bool _blink_on=false;
     unsigned long _last_blink_time=0;
     int _on_time;

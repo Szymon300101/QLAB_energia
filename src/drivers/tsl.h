@@ -8,13 +8,14 @@
 
 #define INTEGR_TIME TSL2561_INTEGRATIONTIME_101MS
 
+//Driver for the Ambient Light Sensor
 class Tsl
 {
     byte _i2c_adrr;
     byte _mux_addr;
     Adafruit_TSL2561_Unified _sensor;
     
-    sensors_event_t _event; //zadeklarowane raz dla stabilności
+    sensors_event_t _event;
 
 public:
     float val_lux;

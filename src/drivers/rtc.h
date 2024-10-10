@@ -4,6 +4,7 @@
 #include "RTClib.h"
 #include "state.h"
 
+//Driver for Real Time Clock
 namespace Rtc
 {
     extern RTC_DS1307 rtc;

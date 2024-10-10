@@ -6,9 +6,12 @@
 
 #define MUX_I2C_ADDR 0x70
 
+//Driver for I2C multiplexer
 namespace Mux
 {
-    void select(byte i);
+    //select output as active (0-7)
+    //WARNING: needs already initialised i2c bus
+    void select(byte i); 
 }
 
 

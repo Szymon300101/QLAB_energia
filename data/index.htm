@@ -40,7 +40,7 @@
                         QLS open <br/>
                         AVG: %room_avg_0% lux <br/>
                         Light: %room_light_0%/220 <br/>
-                        Parrots: %room_parrot_0%/220
+                        Parrots: %room_parrot_0%
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                         QLS closed <br/>
                         AVG: %room_avg_1% lux <br/>
                         Light: %room_light_1%/220<br/>
-                        Parrots: %room_parrot_1%/220
+                        Parrots: %room_parrot_1%
                     </div>
                 </div>
             </div>
@@ -99,18 +99,33 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin: 5vh;">
+        <div class="row" style="margin: 2vh;">
             <div class="col-md-6">
-                <div style="height: 6vh; display: flex; justify-content: center; align-items: center;">
+                <div style="height: 2vh; display: flex; justify-content: center; align-items: center;">
                     <div>
-                        Current draw: %qls_power% mW
+                        Current power: %qls_power% mW
                     </div>
                 </div>
             </div>
             <div class="col-md-6" >
-                <div style="height: 6vh; display: flex; justify-content: center; align-items: center;">
+                <div style="height: 2vh; display: flex; justify-content: center; align-items: center;">
                     <div>
-                        Current draw: %ref_power% mW
+                        Current power: %ref_power% mW
+                    </div>
+                </div>
+            </div>
+        </div><div class="row" style="margin: 2vh;">
+            <div class="col-md-6">
+                <div style="height: 2vh; display: flex; justify-content: center; align-items: center;">
+                    <div>
+                        Total power: %qls_integrated% Wh
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" >
+                <div style="height: 2vh; display: flex; justify-content: center; align-items: center;">
+                    <div>
+                        Total power: %ref_integrated% Wh
                     </div>
                 </div>
             </div>

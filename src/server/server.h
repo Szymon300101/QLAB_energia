@@ -11,11 +11,12 @@
 #include "../lights.h"
 #include "secrets.h"        //if secrets are not defined duplicate secrets_template.h and rename to secrets.h
 
+//Server hosting for GUI webpage
 namespace WebServer
 {
-
     void begin();
-
+    void start();
+    void stop();
 }
 
 

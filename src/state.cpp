@@ -7,10 +7,8 @@ namespace State
     bool qls_open = true;
     bool ref_open = true;
 
-    unsigned long qls_last_state_change_time = 0;
-    unsigned long ref_last_state_change_time = 0;
-
     Integrator ws_integrators[3] = {Integrator(),Integrator(),Integrator()};
+    TurboIntegrator turbo_integrators[3] = {TurboIntegrator('0'),TurboIntegrator('1'),TurboIntegrator('2')};
     
     byte getQlsActiveRoom()
     {
@@ -31,33 +29,45 @@ namespace State
             system_active = true;
             if(qls_open)
             {
-                if(sensor_data.max_open_qls > BLIND_CLOSE_TRES && (millis() - qls_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME))
+                
+                if(sensor_data.max_open_qls > BLIND_CLOSE_TRES)
                 {
                     qls_open = false;
-                    qls_last_state_change_time = millis();
                 }
+                // if(sensor_data.max_open_qls > BLIND_CLOSE_TRES)
+                // {
+                //     if(qls_last_state_change_time > 0 && (millis() - qls_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME))
+                //     {
+                //         qls_open = false;
+                //         qls_last_state_change_time = 0;
+                //     }else if(qls_last_state_change_time == 0)
+                //     {
+                //         qls_last_state_change_time = millis();
+                //     }
+                // }else
+                // {
+                //     qls_last_state_change_time = 0;
+                // }
+                
             }else
             {
-                if((sensor_data.max_open_qls < BLIND_OPEN_TRES && (millis() - qls_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME)))
+                if(sensor_data.max_open_qls < BLIND_OPEN_TRES)
                 {
                     qls_open = true;
-                    qls_last_state_change_time = millis();
                 }
             }
 
             if(ref_open)
             {
-                if(sensor_data.max_open_ref > BLIND_CLOSE_TRES && (millis() - ref_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME))
+                if(sensor_data.max_open_ref > BLIND_CLOSE_TRES)
                 {
                     ref_open = false;
-                    qls_last_state_change_time = millis();
                 }
             }else
             {
-                if((sensor_data.max_open_ref < BLIND_OPEN_TRES && (millis() - ref_last_state_change_time > ROOM_STATE_HYSTERESIS_TIME)))
+                if(sensor_data.max_open_ref < BLIND_OPEN_TRES)
                 {
                     ref_open = true;
-                    qls_last_state_change_time = millis();
                 }
             }
 
@@ -84,5 +94,19 @@ namespace State
             Display::displayErrorCode(code);
             delay(10);
         }
+    }
+
+    void ws_integrate(unsigned int last_loop_time)
+    {
+        State::ws_integrators[0].increment(Sensors::vc_sensors[0].power_mW/1000,last_loop_time);
+        State::ws_integrators[1].increment(Sensors::vc_sensors[1].power_mW/1000,last_loop_time);
+        State::ws_integrators[2].increment(Sensors::vc_sensors[2].power_mW/1000,last_loop_time);
+    }
+
+    void turbo_integrate()
+    {
+        State::turbo_integrators[0].increment(State::ws_integrators[0].get_value());
+        State::turbo_integrators[1].increment(State::ws_integrators[1].get_value());
+        State::turbo_integrators[2].increment(State::ws_integrators[2].get_value());
     }
 }

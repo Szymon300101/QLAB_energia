@@ -20,7 +20,7 @@ void VcSensor::read()
 {
     shuntvoltage_mV = ina219.getShuntVoltage_mV();
     busvoltage_V = ina219.getBusVoltage_V();
-    current_mA = ina219.getCurrent_mA();
-    power_mW = ina219.getPower_mW();
+    current_mA = max(0.0F,ina219.getCurrent_mA());
+    power_mW = max(0.0F,ina219.getPower_mW());
     loadvoltage_V = busvoltage_V + (shuntvoltage_mV / 1000);
 }

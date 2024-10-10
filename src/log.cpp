@@ -10,7 +10,13 @@ namespace Log
         if (!(sd.cardBegin(SD_CONFIG) && sd.volumeBegin())) {
             State::throwError(ErrorCode::sd_operation, "SD not connected.");
         }
-        
+
+        if(!sd.exists("Data.txt")) //simple way to clear turbo integrators in runtime
+        {
+            State::turbo_integrators[0].clear();
+            State::turbo_integrators[1].clear();
+            State::turbo_integrators[2].clear();
+        }
     }
 
     void saveAllData()
@@ -51,23 +57,23 @@ namespace Log
         //print current sensors
         for (int i = 0; i < VC_NUM; i++)
         {
-            logFile.print(Sensors::vc_sensors[i].loadvoltage_V);     logFile.print("; ");
-            logFile.print(Sensors::vc_sensors[i].current_mA);        logFile.print("; ");
-            logFile.print(Sensors::vc_sensors[i].power_mW);          logFile.print("; ");
+            logFile.print(Sensors::vc_sensors[i].loadvoltage_V,3);     logFile.print("; ");
+            logFile.print(Sensors::vc_sensors[i].current_mA,3);        logFile.print("; ");
         }
 
         //print integrators
         for (int i = 0; i < 3; i++)
         {
-            logFile.print(State::ws_integrators[i].get_value());          logFile.print("; ");  //W*s
-            logFile.print(State::ws_integrators[i].get_avg_value());      logFile.print("; ");  //W
+            logFile.print(State::ws_integrators[i].get_value(),3);        logFile.print("; ");  //W*s
             logFile.print(State::ws_integrators[i].get_time_elapsed_s()); logFile.print("; ");  //s
             State::ws_integrators[i].clear();
         }
-        
-        
 
-        
+        //print turbo integrators
+        for (int i = 0; i < 3; i++)
+        {
+            logFile.print(State::turbo_integrators[i].get_value(),3);        logFile.print("; ");  //W*s
+        }
 
         logFile.println(" ");
         logFile.close();
@@ -81,7 +87,7 @@ namespace Log
 
         if(!logFile)
         {
-            //supress error
+            //if can't log, don't log
             return;
         }
 
