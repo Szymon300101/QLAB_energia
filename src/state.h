@@ -29,6 +29,8 @@ namespace State
     byte getQlsActiveRoom();
     byte getRefActiveRoom();
 
+    void begin();
+
     void updateState();
 
     void throwError(bool code, const char* msg);

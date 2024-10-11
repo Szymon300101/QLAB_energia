@@ -27,6 +27,7 @@ void setup(void)
   Rtc::begin();
   Sensors::begin();
   Lights::begin();
+  State::begin();
   WebServer::begin();
   WebServer::start();
 
@@ -44,7 +45,7 @@ void loop(void)
   //log
   if(millis() - last_log_millis > LOG_INTERVAL)
   {
-    State::turbo_integrate();
+    //State::turbo_integrate();
     Log::saveAllData();
     last_log_millis = millis();
   }
@@ -76,4 +77,5 @@ void loop(void)
 
   //integrators
   State::ws_integrate(last_loop_time);
+  State::turbo_integrators[1].increment(Sensors::vc_sensors[1].power_mW/10);
 }

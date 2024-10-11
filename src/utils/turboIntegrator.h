@@ -14,6 +14,7 @@ class TurboIntegrator
 
 public:
     TurboIntegrator(char uid);
+    void begin();
     void increment(double value);
     void clear();
     float get_value();

@@ -4,7 +4,10 @@
 TurboIntegrator::TurboIntegrator(char uid)
 {
     UID = uid;
+}
 
+void TurboIntegrator::begin()
+{
     prefs.begin("TurboIntegrator",true);
     integr_value = prefs.getDouble(&UID,0);
     prefs.end();
