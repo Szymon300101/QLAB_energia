@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 #define BLIND_CLOSE_TRES    3000
-#define BLIND_OPEN_TRES     800
+#define BLIND_OPEN_TRES     2000
 
 #define DAY_START_HOUR      6
 #define DAY_END_HOUR        20

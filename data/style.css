@@ -17,8 +17,20 @@ h1{
     border-radius: 0.5vh;
 }
 
+.sensor-div{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sensor-number{
+    position: absolute;
+    right:3vh;
+    font-size: 75%;
+}
+
 .sensor-table{
-    padding: 4vh;
+    padding: 2vh;
     padding-left: 1vw;
     padding-right: 1vw;
     
@@ -33,9 +45,65 @@ h1{
     border-radius: 1vh;
 }
 
+.room-div{
+    height: 20vh;
+    margin-bottom: 3vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-div{
+    height: 43vh;
+    margin-bottom: 3vh;
+    border: 0.3vh solid white;
+    border-style: none none none solid;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .room-label{
     position: absolute;
     left: 0.5vw;
-    bottom: 0.5vh;
-    font-size: 60%;
+    font-size: 90%;
+}
+
+.box-label{
+    position: absolute;
+    height: 3rem;
+    font-size:3rem;
+    left: 0.5vw;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.power-label{
+    height: 2vh;
+    position: absolute;
+    left: 20vw;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gain-label{
+    position: absolute;
+    height: fit-content;
+    left: 22vw;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    border: 0.3vh solid white;
+    padding: 0.5vw;
+}
+
+.add_percent:after{
+    content:'%'
 }

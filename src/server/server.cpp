@@ -31,15 +31,21 @@ namespace WebServer
             return String(Sensors::tsl_sensors[var[4]-'0'][var[6]-'0'].val_lux,0);
 
         if(var.startsWith("room_light_"))
-            return String(Lights::values[var[11]-'0']);
+            return String(Lights::values[var[11]-'0']/REG_MAX_VALUE);
             
         if(var == "room_parrot_0")
-            return Lights::parrot_values[0]>0 ? "On" : "Off";
+            return Lights::parrot_values[0]>0 ? "100" : "0";
         if(var == "room_parrot_1")
-            return Lights::parrot_values[1]>0 ? "On" : "Off";
+            return Lights::parrot_values[1]>0 ? "100" : "0";
             
         if(var.startsWith("room_avg_"))
             return String(Sensors::getRoomAvg(var[9]-'0'),0);
+
+        if(var == "gain_percent"){
+            float qls = State::turbo_integrators[0].get_value() + State::turbo_integrators[2].get_value();
+            float ref = State::turbo_integrators[1].get_value();
+            return String((1-(qls/ref))*100);
+        }
 
         Serial.print("Unused template:  ");
         Serial.println(var);
@@ -62,6 +68,19 @@ namespace WebServer
 
         server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
             request->send(SPIFFS, "/style.css", "text/css");
+        });
+
+        server.on("/R0", HTTP_GET, [](AsyncWebServerRequest *request){
+            request->send(SPIFFS, "/R0.JPG", "image/png");
+        });
+        server.on("/R1", HTTP_GET, [](AsyncWebServerRequest *request){
+            request->send(SPIFFS, "/R1.JPG", "image/png");
+        });
+        server.on("/Q0", HTTP_GET, [](AsyncWebServerRequest *request){
+            request->send(SPIFFS, "/Q0.JPG", "image/png");
+        });
+        server.on("/Q1", HTTP_GET, [](AsyncWebServerRequest *request){
+            request->send(SPIFFS, "/Q1.JPG", "image/png");
         });
     }
 
